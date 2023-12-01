@@ -1,56 +1,66 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'RMS') }}</title>
-
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
     
-    <!-- Ionicons -->
-    <link rel="shortcut icon" href="{{ asset('asset/img/favicon.ico')}}"/>
-    @yield('style')
-    <script> var BASE_URL = '{{config('app.url')}}'; </script>
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{{ config('app.name', 'H0R0SC0P3') }}</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ asset('asset/favicon.ico') }}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ asset('asset/css/styles.css') }}" rel="stylesheet" />
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-
-    
-
-    <script type="text/javascript">
-        $(function () {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+        <script type="text/javascript">
+            $(function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
             });
-        });
-    </script>
 
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+                })
+          </script>
 
-    <!--WYSIWYG CK Editor-->
-@yield('script')
-</body>
+    </head>
+    <body id="page-top">  
 
-</head>
+		<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+		  <div class="container-fluid">
+		    <a class="navbar-brand"><img src="https://static.thenounproject.com/png/1942107-200.png" width="50" style="filter: invert(100%)" />&nbsp;Horscope</a>
+		    <form class="d-flex" role="search" method = "POST" action="{{route('year_filter')}}">
+		    	@csrf
+		      <input class="form-control me-2" type="search" name ="year" placeholder="Zodiac Year (YYYY)" aria-label="Zodiac Year" value="{{old('year')}}">
+		      <button class="btn btn-primary" type="submit">Find!</button>
+		    </form> 
+		  </div>
+		</nav>
 
-<body class="">
-<div class="wrapper">
-    <div class="main">
-            @yield('content')
-    </div>
-    
-</div>
+		<!-- Content Section -->
+		<div class="container">
+		    @yield('content')
+		</div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ asset('asset/js/scripts.js') }}"></script>
+
+    </body>
 </html>

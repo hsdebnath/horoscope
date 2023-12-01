@@ -21,15 +21,15 @@ class Controller extends BaseController
 
         $exists = Dates::where('year', '=', $year)->first();
         if ($exists) {
-            //dd("year exists !!");
-            $Dates = Dates::where('year', $year)->with('Scores')->get();  //dd($Dates);
-            return view('welcome')->with('Dates', $Dates);
+
+            $Dates = Dates::where('year', $year)->with('Scores')->get(); 
+            return view('home')->with('Dates', $Dates);
         }else{
-           //dd("inside else ".$year);
-            $data = $this->generate_horoscope($year); //dd($data);
+
+            $data = $this->generate_horoscope($year);
            if ($data) {
-            $Dates = Dates::where('year', $year)->with('Scores')->get(); //dd($Dates);
-            return view('welcome')->with('Dates', $Dates);   
+            $Dates = Dates::where('year', $year)->with('Scores')->get();
+            return view('home')->with('Dates', $Dates);   
            }
            else {
                dd("hay hay");
@@ -39,26 +39,26 @@ class Controller extends BaseController
         
     }   
 
-
     public function year_filter(Request $request){
 
         $request->validate([
-            'year' => 'required|digits:4|integer|min:1900|max:2000'
+            'year' => 'required|digits:4|integer|min:1950|max:2050'
         ]);
         
         $year = $request->input('year');
 
+
         $exists = Dates::where('year', '=', $year)->first();
         if ($exists) {
-            //dd("year exists !!");
-            $Dates = Dates::where('year', $year)->with('Scores')->get();  //dd($Dates);
-            return view('welcome')->with('Dates', $Dates);
+
+            $Dates = Dates::where('year', $year)->with('Scores')->get();
+            return view('home')->with('Dates', $Dates);
         }else{
-           //dd("inside else ".$year);
-            $data = $this->generate_horoscope($year); //dd($data);
+
+            $data = $this->generate_horoscope($year);
            if ($data) {
-            $Dates = Dates::where('year', $year)->with('Scores')->get(); //dd($Dates);
-            return view('welcome')->with('Dates', $Dates);   
+            $Dates = Dates::where('year', $year)->with('Scores')->get(); 
+            return view('home')->with('Dates', $Dates);   
            }
            else {
                dd("hay hay");
@@ -69,12 +69,6 @@ class Controller extends BaseController
     }
 
     public function generate_horoscope($year){
-
-        //dd("inside function");
-        
-        // $color = array("1"=>"#ff0000","2"=>"#FF6347","3"=>"#FFA07A","4"=>"#FFA500","5"=>"#EEE8AA","6"=>"#FFFF00","7"=>"#9ACD32","8"=>"#00FF7F","9"=>"#32CD32","10"=>"#00ff00");
-        // $zodiac = array("1"=>"Aries","2"=>"Taurus","3"=>"Gemini","4"=>"Cancer","5"=>"Leo","6"=>"Virgo","7"=>"Libra","8"=>"Scorpio","9"=>"Sagittarius","10"=>"Capricorn","11"=>"Aquarius","12"=>"Pisces");
-
 
         $input_year = $year;
         $start = "1/1/".$year;                                    
